@@ -11,8 +11,13 @@ function App() {
 	const [products] = useState(data);
 	const [cart, setCart] = useState([]);
 
+	//In `App.js` there is a function called `addItem`. Finish writing the logic in this function to be able to add the given item to the shopping cart
 	const addItem = item => {
 		// add the given item to the cart
+		setCart([
+			...cart,
+			item
+		])
 	};
 
 	return (
