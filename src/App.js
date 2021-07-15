@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import data from './data';
+//Now that we've created our `ProductContext` we can import into our `App.js`.
+import { ProductContext } from './contexts/ProductContext';
 
 // Components
 import Navigation from './components/Navigation';
@@ -19,19 +21,22 @@ function App() {
 			item
 		])
 	};
-
+	
 	return (
 		<div className="App">
 			<Navigation cart={cart} />
+			{/* 1.) Wrap all of your components/routes in `App.js` inside of `ProductContext.Provider` component. 2.) Next pass a value prop to your `Provider`. 3.) In the value prop we'll pass in the products state, and an addItem function that will allow us to add books to the cart. */}
+			<ProductContext.Provider value={}>
+				{/* Routes */}
+				<Route exact path="/">
+					{/*  Now that we're providing our products state and addItem function we can simplify our products route a bit. (Remove props) */}
+					<Products />
+				</Route>
 
-			{/* Routes */}
-			<Route exact path="/">
-				<Products products={products} addItem={addItem} />
-			</Route>
-
-			<Route path="/cart">
-				<ShoppingCart cart={cart} />
-			</Route>
+				<Route path="/cart">
+					<ShoppingCart />
+				</Route>
+			</ProductContext.Provider>
 		</div>
 	);
 }
